@@ -1,0 +1,158 @@
+/* Container */
+.container {
+  width: 400px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin: auto;
+  margin-top: 5vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+
+
+.logo {
+  margin: 1rem 0;
+}
+
+.logo img {
+  width: 80px;
+}
+
+
+.inputGroup { position: relative; margin-bottom: 1.5rem; } 
+.inputGroup input { width: 80%; /* use full width */ padding: 12px 40px 12px 40px; /* space for left and right icons */ border: none; border-bottom: 1px solid #ccc; font-size: 14px; outline: none; } 
+.inputGroup svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #999; }
+
+
+
+.eyeIcon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #555;
+  position: absolute;
+  left: 800px;
+  top: 62%;
+  transform: translateY(-50%);
+}
+
+
+
+
+
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #27c6e5, #1da1f2);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1da1f2, #27c6e5);
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btnSpinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #ff6b6b;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer a {
+  color: #1da1f2;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 15px;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    margin-top: 2vh;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .inputGroup input {
+    font-size: 13px;
+    padding: 10px 35px 10px 35px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .footer {
+    font-size: 13px;
+  }
+}
+

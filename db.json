@@ -1,0 +1,97 @@
+{
+  "users": [
+    {
+      "name": "John",
+      "surname": "Doe",
+      "email": "john@example.com",
+      "password": "1234567",
+      "cell": "0712345678",
+      "id": "1"
+    },
+    {
+      "name": "Nyakallo",
+      "surname": "Dolamo",
+      "email": "Dolamo@gmail.com",
+      "password": "123456789",
+      "cell": "078655443",
+      "id": "e1ed"
+    },
+    {
+      "id": "6051",
+      "email": "rendeiy@gmail.com",
+      "password": "1234567",
+      "name": "ihewfih",
+      "surname": "ehri23h",
+      "cell": "0988987874"
+    },
+    {
+      "id": "921b",
+      "email": "simon@example.com",
+      "password": "123456",
+      "name": "t43",
+      "surname": "t43",
+      "cell": "0988987874"
+    },
+    {
+      "id": "11c2",
+      "email": "johnr@example.com",
+      "password": "1234567",
+      "name": "wd",
+      "surname": "wdwdw",
+      "cell": "0867586588"
+    },
+    {
+      "id": "cbc9",
+      "email": "simon1@example.com",
+      "password": "1234567",
+      "name": "John",
+      "surname": "auhsd",
+      "cell": "0988987874"
+    },
+    {
+      "id": "4d81",
+      "name": "nhd",
+      "surname": "sjw ",
+      "email": "dnnf@gduhu",
+      "password": "1234567",
+      "cell": "08765756834"
+    },
+    {
+      "id": "97fc",
+      "name": "nidn",
+      "surname": "dniwnqi",
+      "email": "ndun@mmd",
+      "password": "123456789",
+      "cell": "0986767464"
+    },
+    {
+      "id": "dd78",
+      "name": "ngjkrnjg",
+      "email": "ubdb@buberuy",
+      "password": "12345678",
+      "cell": "09885757765"
+    },
+    {
+      "id": "4319",
+      "name": "nyrv",
+      "email": "bb@xcrt",
+      "password": "yey3gyrg3",
+      "cell": "07564645535243"
+    },
+    {
+      "id": "1c4d",
+      "name": "karabo",
+      "email": "karabo@gmail.com",
+      "password": "123456789",
+      "cell": "09876543218"
+    },
+    {
+      "name": "Nyakallo",
+      "surname": "Dolamo",
+      "email": "rendeiy@gmail.com",
+      "password": "bbbbbbbbbbbbb",
+      "cell": "0988987874",
+      "id": "0198"
+    }
+  ]
+}

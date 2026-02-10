@@ -186,7 +186,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Nyakallo**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@dolamo-ui](https://github.com/dolamo-ui)
 
 
 ---
@@ -206,4 +206,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   Made with ❤️ by Nyakallo
   
 </div>
+
 

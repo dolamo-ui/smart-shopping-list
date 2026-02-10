@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h1 className="text-4xl font-bold text-slate-800">
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
         </Link>
       </header>
 
-      {/* Search and Filter */}
+     
       <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Items Grid or Empty State */}
+      
       {filteredItems.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredItems.map(item => (
@@ -119,5 +119,6 @@ const Dashboard: React.FC = () => {
     </div>
   );
 };
+
 
 export default Dashboard;

@@ -1,7 +1,6 @@
 # 🛒 ShopSwift - Modern Shopping List
 
-<div align="center">
-  <img src="screenshots/dashboard.png" alt="ShopSwift Dashboard" width="800"/>
+
   
   ### Your Smart Shopping Companion
   
@@ -32,15 +31,16 @@
 
 <div align="center">
   
-  ### Login Page<img width="1909" height="827" alt="screencapture-localhost-5173-2026-02-10-12_06_25" src="https://github.com/user-attachments/assets/7c16f008-4bd8-42fb-84fe-eac0d5c519fd" />
-
-  <img src="screenshots/login.png" alt="Login" width="600"/>
+ <img width="1909" height="1103" alt="screencapture-localhost-5173-2026-02-10-12_03_17" src="https://github.com/user-attachments/assets/34d33ea5-7654-4757-9966-26b1ab4f2239" />
   
   ### Registration
-  <img src="screenshots/register.png" alt="Register" width="600"/>
+  <img width="1909" height="1355" alt="screencapture-localhost-5173-2026-02-10-12_03_48" src="https://github.com/user-attachments/assets/2556772e-997e-40fd-85da-648e570a20b4" />
+
   
   ### Dashboard
-  <img src="screenshots/dashboard.png" alt="Dashboard" width="600"/>
+  <img width="1909" height="827" alt="screencapture-localhost-5173-2026-02-10-12_06_25" src="https://github.com/user-attachments/assets/041b8c19-bcd6-483b-a456-7b0b7248d6f6" />
+
+ 
   
 </div>
 
@@ -92,31 +92,7 @@ Before you begin, ensure you have the following installed:
 
 ---
 
-## 📁 Project Structure
 
-```
-shopswift/
-├── components/           # Reusable React components
-│   ├── ItemCard.tsx     # Shopping item display card
-│   └── Navbar.tsx       # Navigation bar component
-├── context/             # React Context for state management
-│   ├── AuthContext.tsx  # Authentication state
-│   └── ShoppingContext.tsx # Shopping list state
-├── pages/               # Application pages/routes
-│   ├── AddItem.tsx      # Add new shopping item
-│   ├── Dashboard.tsx    # Main dashboard view
-│   ├── Login.tsx        # User login
-│   ├── Profile.tsx      # User profile management
-│   └── Register.tsx     # User registration
-├── screenshots/         # Application screenshots
-├── App.tsx              # Main app component with routing
-├── constants.tsx        # Application constants
-├── index.tsx            # Application entry point
-├── types.ts             # TypeScript type definitions
-└── vite.config.ts       # Vite configuration
-```
-
----
 
 ## 🎯 Core Technologies
 
@@ -211,7 +187,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Nyakallo**
 
 - GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+
 
 ---
 
@@ -230,3 +206,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   Made with ❤️ by Nyakallo
   
 </div>
+

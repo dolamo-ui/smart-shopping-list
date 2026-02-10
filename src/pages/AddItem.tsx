@@ -116,7 +116,7 @@ const AddItem: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* Back Button */}
+     
       <button 
         onClick={() => navigate(-1)}
         className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 mb-6 transition-colors font-medium"
@@ -125,9 +125,9 @@ const AddItem: React.FC = () => {
         <span>Back</span>
       </button>
 
-      {/* Main Card */}
+     
       <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-        {/* Header */}
+       
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-10 text-white">
           <h1 className="text-3xl font-bold mb-2">{isEditing ? 'Edit Item' : 'Add New Item'}</h1>
           <p className="text-blue-100">
@@ -135,7 +135,7 @@ const AddItem: React.FC = () => {
           </p>
         </div>
 
-        {/* Form */}
+       
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           {error && (
             <div className="p-4 bg-red-50 text-red-600 text-sm font-medium rounded-xl border border-red-200">
@@ -144,7 +144,7 @@ const AddItem: React.FC = () => {
           )}
 
           <div className="space-y-5">
-            {/* Item Name */}
+           
             <div>
               <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700 mb-2">
                 <Package size={16} className="text-blue-600" />
@@ -163,7 +163,7 @@ const AddItem: React.FC = () => {
               />
             </div>
 
-            {/* Quantity and Category */}
+           
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700 mb-2">
@@ -201,7 +201,7 @@ const AddItem: React.FC = () => {
               </div>
             </div>
 
-            {/* Notes */}
+           
             <div>
               <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700 mb-2">
                 <FileText size={16} className="text-blue-600" />
@@ -216,7 +216,7 @@ const AddItem: React.FC = () => {
               ></textarea>
             </div>
 
-            {/* Image Upload */}
+            
             <div>
               <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700 mb-2">
                 <Upload size={16} className="text-blue-600" />
@@ -259,7 +259,7 @@ const AddItem: React.FC = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
+         
           <div className="flex space-x-3 pt-4">
             <button 
               type="button"
@@ -280,5 +280,6 @@ const AddItem: React.FC = () => {
     </div>
   );
 };
+
 
 export default AddItem;

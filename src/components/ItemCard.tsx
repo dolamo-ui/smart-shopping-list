@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ShoppingItem } from '../../types'; // Changed from '../../types'
-import { CATEGORY_CONFIG } from '../../constants'; // Changed from '../../constants'
+import type { ShoppingItem, Category } from '../../types';
+import { CATEGORY_CONFIG } from '../../constants';
 import { Edit2, Trash2, StickyNote, Paperclip, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +10,8 @@ interface ItemCardProps {
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete }) => {
-  const config = CATEGORY_CONFIG[item.category];
+  // ✅ FIX: Type assertion to tell TypeScript that item.category is a valid Category
+  const config = CATEGORY_CONFIG[item.category as Category];
 
   return (
     <div className="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 p-5 flex flex-col h-full">

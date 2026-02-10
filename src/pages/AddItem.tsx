@@ -11,12 +11,19 @@ const AddItem: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector((state: RootState) => state.shoppingList.items);
+  const { user } = useSelector((state: RootState) => state.login);
   const isEditing = !!id;
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    quantity: string;
+    category: Category;
+    notes: string;
+    image: string;
+  }>({
     name: '',
     quantity: '1',
-    category: Category.Groceries,
+    category: 'Groceries',
     notes: '',
     image: ''
   });
@@ -29,10 +36,10 @@ const AddItem: React.FC = () => {
       if (item) {
         setFormData({
           name: item.name,
-          quantity: item.quantity,
+          quantity: String(item.quantity),
           category: item.category as Category,
           notes: item.notes || '',
-          image: item.image || ''
+          image: item.attachmentUrl || ''
         });
       } else {
         navigate('/dashboard');
@@ -82,21 +89,25 @@ const AddItem: React.FC = () => {
         id,
         updatedData: {
           name: formData.name,
-          quantity: formData.quantity,
+          quantity: qty,
           category: formData.category,
           notes: formData.notes,
-          image: formData.image
+          attachmentUrl: formData.image,
+          attachmentName: formData.image ? 'Image' : undefined,
+          userId: user?.id || ''
         }
       }));
     } else {
       dispatch(addItem({
         id: Date.now().toString(),
         name: formData.name,
-        quantity: formData.quantity,
+        quantity: qty,
         category: formData.category,
         notes: formData.notes,
-        image: formData.image,
-        dateAdded: Date.now()
+        attachmentUrl: formData.image,
+        attachmentName: formData.image ? 'Image' : undefined,
+        userId: user?.id || '',
+        createdAt: Date.now()
       }));
     }
     
@@ -178,7 +189,9 @@ const AddItem: React.FC = () => {
                 </label>
                 <select 
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value as Category })}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    setFormData({ ...formData, category: e.target.value as Category });
+                  }}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all cursor-pointer"
                 >
                   {Object.values(Category).map(cat => (

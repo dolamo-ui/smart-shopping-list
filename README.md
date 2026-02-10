@@ -80,6 +80,19 @@ Before you begin, ensure you have the following installed:
    
    Navigate to `http://localhost:5173` to see the application running.
 
+
+
+   🗄️ Mock Backend (db.json)
+
+ShopSwift uses a mock REST API powered by json-server to simulate a backend for authentication, users, and shopping items.
+
+
+▶️ Run the Mock API
+
+From the project root, run:
+
+json-server --watch db.json --port 3001
+
 ---
 
 ## 🛠️ Available Scripts
@@ -149,7 +162,7 @@ The application includes a complete authentication system:
 - Secure login system
 - Remember me functionality
 - User profile management
-- Password recovery option
+
 
 ---
 
@@ -206,5 +219,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   Made with ❤️ by Nyakallo
   
 </div>
+
 
 

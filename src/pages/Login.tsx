@@ -47,7 +47,7 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        {/* Logo and Title */}
+        
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
             <ShoppingBag size={32} className="text-white" />
@@ -56,7 +56,7 @@ const Login: React.FC = () => {
           <p className="text-slate-600">Sign in to your account</p>
         </div>
 
-        {/* Login Card */}
+        
         <div className="bg-white rounded-3xl shadow-xl p-8 border border-slate-200">
           {error && (
             <div className="mb-6 p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-200">
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email Input */}
+           
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
               <div className="relative">
@@ -81,7 +81,7 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-            {/* Password Input */}
+           
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
               <div className="relative">
@@ -97,7 +97,7 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
+           
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center space-x-2 text-slate-600 cursor-pointer">
                 <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
@@ -106,7 +106,7 @@ const Login: React.FC = () => {
               <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">Forgot password?</a>
             </div>
 
-            {/* Submit Button */}
+           
             <button 
               type="submit"
               disabled={loading}
@@ -123,7 +123,7 @@ const Login: React.FC = () => {
             </button>
           </form>
 
-          {/* Register Link */}
+          
           <div className="mt-6 text-center text-slate-600">
             Don't have an account?{' '}
             <Link to="/register" className="text-blue-600 hover:text-blue-700 font-semibold">
@@ -135,5 +135,6 @@ const Login: React.FC = () => {
     </div>
   );
 };
+
 
 export default Login;

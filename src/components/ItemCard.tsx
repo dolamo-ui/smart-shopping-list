@@ -10,7 +10,7 @@ interface ItemCardProps {
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete }) => {
-  // ✅ FIX: Type assertion to tell TypeScript that item.category is a valid Category
+  
   const config = CATEGORY_CONFIG[item.category as Category];
 
   return (
@@ -80,5 +80,6 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete }) => {
     </div>
   );
 };
+
 
 export default ItemCard;

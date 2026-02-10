@@ -1,75 +1,59 @@
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from './store/store';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import type { RootState } from './app/store';
-import { logout } from './features/login/loginSlice';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import AddItem from './pages/AddItem';
 
-import LoginForm from './features/login/LoginForm';
-import RegisterForm from './features/register/RegisterForm';
-import ShoppingList from './features/shoppingList/ShoppingList';
-import Profile from './features/profile/Profile';
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.login);
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
 
-import './App.css';
-
-// Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSignOutAlt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
-function App() {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => !!state.login.user);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
+const App: React.FC = () => {
   return (
-    <div className="app-container">
-      {/* Navigation menu only when logged in */}
-      {isLoggedIn && (
-        <nav className="nav-bar">
-          <div className="nav-left">
-            <div className="logo">🛍️ MyShop</div>
-          </div>
-
-          <div className="nav-right">
-            <Link to="/shopping-list" className="nav-link">
-              <FontAwesomeIcon icon={faShoppingCart} /> Shopping List
-            </Link>
-            <Link to="/profile" className="nav-link">
-              <FontAwesomeIcon icon={faUser} /> Profile
-            </Link>
-            <button onClick={handleLogout} className="nav-link logout-button">
-              <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-            </button>
-          </div>
-        </nav>
-      )}
-
-      {/* Routes */}
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={isLoggedIn ? '/shopping-list' : '/login'} />}
-        />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-
-        {/* Protected Routes */}
-        <Route
-          path="/shopping-list"
-          element={isLoggedIn ? <ShoppingList /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/profile"
-          element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
-        />
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <Navbar />
+      <main className="container mx-auto px-4 py-8 max-w-6xl">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/add" element={
+            <ProtectedRoute>
+              <AddItem />
+            </ProtectedRoute>
+          } />
+          <Route path="/edit/:id" element={
+            <ProtectedRoute>
+              <AddItem />
+            </ProtectedRoute>
+          } />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </main>
     </div>
   );
-}
+};
 
 export default App;

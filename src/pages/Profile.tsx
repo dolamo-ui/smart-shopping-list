@@ -84,11 +84,11 @@ const Profile: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-        {/* Header Banner */}
+        
         <div className="h-40 bg-gradient-to-r from-blue-600 to-purple-600"></div>
         
         <div className="px-8 pb-10">
-          {/* Profile Picture and Name */}
+         
           <div className="flex flex-col md:flex-row md:items-end -mt-16 mb-8 gap-6">
             <div className="relative group">
               <div className="w-32 h-32 rounded-3xl border-4 border-white bg-slate-200 overflow-hidden shadow-xl">
@@ -122,14 +122,14 @@ const Profile: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Content Grid */}
+         
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Account Details */}
+            
             <div className="space-y-6">
               <h3 className="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3">Account Details</h3>
               
               <div className="space-y-4">
-                {/* Full Name */}
+               
                 <div className="flex items-center space-x-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="p-2.5 bg-blue-100 rounded-lg">
                     <UserIcon size={20} className="text-blue-600" />
@@ -150,7 +150,7 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Email */}
+               
                 <div className="flex items-center space-x-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="p-2.5 bg-purple-100 rounded-lg">
                     <Mail size={20} className="text-purple-600" />
@@ -161,7 +161,7 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Phone */}
+                
                 <div className="flex items-center space-x-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="p-2.5 bg-green-100 rounded-lg">
                     <Phone size={20} className="text-green-600" />
@@ -182,7 +182,7 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Member Since */}
+                
                 <div className="flex items-center space-x-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="p-2.5 bg-orange-100 rounded-lg">
                     <Calendar size={20} className="text-orange-600" />
@@ -193,7 +193,7 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Edit/Save Button */}
+               
                 <button 
                   onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                   disabled={profile.status === 'loading'}
@@ -205,7 +205,7 @@ const Profile: React.FC = () => {
               </div>
             </div>
 
-            {/* Settings & Actions */}
+           
             <div className="space-y-6">
               <h3 className="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3">Settings & Actions</h3>
               <div className="space-y-3">
@@ -239,5 +239,6 @@ const Profile: React.FC = () => {
     </div>
   );
 };
+
 
 export default Profile;

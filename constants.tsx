@@ -1,37 +1,48 @@
-
 import React from 'react';
-import { ShoppingCart, Home, Smartphone, Pill, Shirt, PlusCircle } from 'lucide-react';
-import { Category } from './types';
+import { LayoutGrid, Leaf, Beef, Milk, Croissant, ShoppingBasket } from 'lucide-react';
 
-export const CATEGORY_CONFIG: Record<Category, { icon: React.ReactNode; color: string; bg: string }> = {
-  [Category.Groceries]: {
-    icon: <ShoppingCart size={16} />,
-    color: 'text-green-600',
-    bg: 'bg-green-100 dark:bg-green-900/30 dark:text-green-400'
+interface CategoryConfig {
+  bg: string;
+  text: string;
+  icon: React.ReactNode;
+}
+
+export const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
+  'All': {
+    bg:   '#f1f5f9',
+    text: '#334155',
+    icon: React.createElement(LayoutGrid,     { size: 12 }),
   },
-  [Category.Household]: {
-    icon: <Home size={16} />,
-    color: 'text-blue-600',
-    bg: 'bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400'
+  'Fresh Produce': {
+    bg:   '#d1fae5',
+    text: '#065f46',
+    icon: React.createElement(Leaf,           { size: 12 }),
   },
-  [Category.Electronics]: {
-    icon: <Smartphone size={16} />,
-    color: 'text-purple-600',
-    bg: 'bg-purple-100 dark:bg-purple-900/30 dark:text-purple-400'
+  'Meat & Protein': {
+    bg:   '#fee2e2',
+    text: '#991b1b',
+    icon: React.createElement(Beef,           { size: 12 }),
   },
-  [Category.Pharmacy]: {
-    icon: <Pill size={16} />,
-    color: 'text-red-600',
-    bg: 'bg-red-100 dark:bg-red-900/30 dark:text-red-400'
+  'Dairy': {
+    bg:   '#dbeafe',
+    text: '#1e40af',
+    icon: React.createElement(Milk,           { size: 12 }),
   },
-  [Category.Fashion]: {
-    icon: <Shirt size={16} />,
-    color: 'text-pink-600',
-    bg: 'bg-pink-100 dark:bg-pink-900/30 dark:text-pink-400'
+  'Bakery': {
+    bg:   '#fef3c7',
+    text: '#92400e',
+    icon: React.createElement(Croissant,      { size: 12 }),
   },
-  [Category.Other]: {
-    icon: <PlusCircle size={16} />,
-    color: 'text-slate-600',
-    bg: 'bg-slate-100 dark:bg-slate-800 dark:text-slate-400'
-  }
+  'Pantry': {
+    bg:   '#ede9fe',
+    text: '#4c1d95',
+    icon: React.createElement(ShoppingBasket, { size: 12 }),
+  },
+};
+
+// Safe fallback for any unknown/stale category value
+export const FALLBACK_CATEGORY_CONFIG: CategoryConfig = {
+  bg:   '#f1f5f9',
+  text: '#334155',
+  icon: React.createElement(ShoppingBasket, { size: 12 }),
 };

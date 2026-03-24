@@ -1,11 +1,10 @@
-// Replace enum with const object and type
 export const Category = {
-  Groceries: 'Groceries',
-  Household: 'Household',
-  Electronics: 'Electronics',
-  Pharmacy: 'Pharmacy',
-  Fashion: 'Fashion',
-  Other: 'Other'
+  All:          'All',
+  FreshProduce: 'Fresh Produce',
+  MeatProtein:  'Meat & Protein',
+  Dairy:        'Dairy',
+  Bakery:       'Bakery',
+  Pantry:       'Pantry',
 } as const;
 
 export type Category = typeof Category[keyof typeof Category];
@@ -23,7 +22,7 @@ export interface ShoppingItem {
   id: string;
   name: string;
   quantity: number;
-  category: Category;
+  category: string;
   notes?: string;
   attachmentUrl?: string;
   attachmentName?: string;

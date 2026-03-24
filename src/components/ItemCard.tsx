@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ShoppingItem, Category } from '../../types';
-import { CATEGORY_CONFIG } from '../../constants';
+import type { ShoppingItem } from '../../types';
+import { CATEGORY_CONFIG, FALLBACK_CATEGORY_CONFIG } from '../../constants';
 import { Edit2, Trash2, StickyNote, Paperclip, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -10,76 +10,191 @@ interface ItemCardProps {
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete }) => {
-  
-  const config = CATEGORY_CONFIG[item.category as Category];
+  const config = CATEGORY_CONFIG[item.category] ?? FALLBACK_CATEGORY_CONFIG;
 
   return (
-    <div className="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 p-5 flex flex-col h-full">
-      <div className="flex justify-between items-start mb-4">
-        <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-medium ${config.bg}`}>
+    <div
+      style={{
+        background: '#fff',
+        borderRadius: '20px',
+        border: '1.5px solid #e2e8f0',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+        padding: '1.25rem',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+        transition: 'box-shadow 0.2s, transform 0.2s',
+      }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 28px rgba(124,58,237,0.12)';
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)';
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+      }}
+    >
+      {/* Top row */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            background: config.bg,
+            color: config.text,
+            padding: '4px 10px',
+            borderRadius: '100px',
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.02em',
+          }}
+        >
           {config.icon}
-          <span>{item.category}</span>
+          {item.category}
         </div>
-        <div className="flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Link 
+
+        <div style={{ display: 'flex', gap: '4px' }}>
+          <Link
             to={`/edit/${item.id}`}
-            className="p-1.5 text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-slate-700 rounded-lg transition-colors"
+            style={{
+              padding: '6px',
+              borderRadius: '8px',
+              color: '#94a3b8',
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              transition: 'background 0.15s, color 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLAnchorElement).style.background = '#f5f3ff';
+              (e.currentTarget as HTMLAnchorElement).style.color = '#7c3aed';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+              (e.currentTarget as HTMLAnchorElement).style.color = '#94a3b8';
+            }}
           >
-            <Edit2 size={16} />
+            <Edit2 size={15} />
           </Link>
-          <button 
+          <button
             onClick={() => onDelete(item.id)}
-            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+            style={{
+              padding: '6px',
+              borderRadius: '8px',
+              border: 'none',
+              background: 'transparent',
+              color: '#94a3b8',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'background 0.15s, color 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = '#fef2f2';
+              (e.currentTarget as HTMLButtonElement).style.color = '#ef4444';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+              (e.currentTarget as HTMLButtonElement).style.color = '#94a3b8';
+            }}
           >
-            <Trash2 size={16} />
+            <Trash2 size={15} />
           </button>
         </div>
       </div>
 
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-1 leading-tight capitalize">
+      {/* Item name + quantity */}
+      <div style={{ flex: 1 }}>
+        <h3
+          style={{
+            fontSize: '1.05rem',
+            fontWeight: 700,
+            color: '#1e293b',
+            marginBottom: '4px',
+            lineHeight: 1.3,
+            textTransform: 'capitalize',
+          }}
+        >
           {item.name}
         </h3>
-        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 flex items-center mb-3">
-          Quantity: <span className="ml-1 text-primary-600 dark:text-primary-400 font-bold">{item.quantity}</span>
+
+        <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginBottom: '0.75rem', fontWeight: 500 }}>
+          Qty:{' '}
+          <span style={{ color: '#7c3aed', fontWeight: 700 }}>{item.quantity}</span>
         </p>
 
         {item.notes && (
-          <div className="flex items-start space-x-2 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl mb-3">
-            <StickyNote size={14} className="text-slate-400 mt-1 shrink-0" />
-            <p className="text-sm text-slate-600 dark:text-slate-400 italic line-clamp-3">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '8px',
+              padding: '0.6rem 0.75rem',
+              background: '#f8fafc',
+              borderRadius: '10px',
+              marginBottom: '0.75rem',
+            }}
+          >
+            <StickyNote size={13} style={{ color: '#94a3b8', marginTop: '2px', flexShrink: 0 }} />
+            <p
+              style={{
+                fontSize: '0.82rem',
+                color: '#64748b',
+                fontStyle: 'italic',
+                lineHeight: 1.5,
+                margin: 0,
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+              }}
+            >
               {item.notes}
             </p>
           </div>
         )}
       </div>
 
+      {/* Attachment */}
       {item.attachmentUrl && (
-        <div className="mt-auto pt-3 border-t border-slate-100 dark:border-slate-700">
-          <a 
-            href={item.attachmentUrl} 
-            target="_blank" 
+        <div style={{ marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid #f1f5f9' }}>
+          <a
+            href={item.attachmentUrl}
+            target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-xs font-medium text-primary-600 dark:text-primary-400 hover:underline"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              color: '#7c3aed',
+              textDecoration: 'none',
+            }}
           >
-            <Paperclip size={14} />
-            <span className="truncate flex-1">{item.attachmentName || 'Attachment'}</span>
-            <ExternalLink size={12} />
+            <Paperclip size={13} />
+            <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {item.attachmentName || 'Attachment'}
+            </span>
+            <ExternalLink size={11} />
           </a>
+
           {item.attachmentUrl.startsWith('data:image/') && (
-            <div className="mt-2 rounded-lg overflow-hidden h-24 w-full bg-slate-100 dark:bg-slate-900">
-              <img src={item.attachmentUrl} alt={item.name} className="w-full h-full object-cover" />
+            <div style={{ marginTop: '8px', borderRadius: '10px', overflow: 'hidden', height: '96px', background: '#f1f5f9' }}>
+              <img src={item.attachmentUrl} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           )}
         </div>
       )}
-      
-      <div className="mt-3 text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+
+      {/* Date */}
+      <div style={{ marginTop: '0.75rem', fontSize: '0.7rem', color: '#cbd5e1', fontWeight: 500 }}>
         Added {new Date(item.createdAt).toLocaleDateString()}
       </div>
     </div>
   );
 };
-
 
 export default ItemCard;

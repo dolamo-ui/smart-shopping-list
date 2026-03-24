@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/loginSlice';
+import { clearItems } from '../store/shoppingListSlice'; // ✅ NEW IMPORT
 import type { RootState } from '../store/store';
 import { 
   ShoppingBag, 
@@ -20,6 +21,7 @@ const Navbar: React.FC = () => {
   const { isAuthenticated, user } = useSelector((state: RootState) => state.login);
 
   const handleLogout = () => {
+    dispatch(clearItems()); // ✅ Wipe items from store so next user starts clean
     dispatch(logout());
     navigate('/login');
     setIsMenuOpen(false);

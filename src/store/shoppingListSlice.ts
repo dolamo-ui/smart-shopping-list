@@ -10,22 +10,54 @@ const initialState: ShoppingListState = {
   items: []
 };
 
-// ✅ Helper function to ensure quantity is always a number
+// ─── LocalStorage helpers (keyed per user) ───────────────────────────────────
+
+export const saveItemsForUser = (userId: string, items: ShoppingItem[]) => {
+  try {
+    localStorage.setItem(`shopping_items_${userId}`, JSON.stringify(items));
+  } catch (e) {
+    console.error('Failed to save items to localStorage', e);
+  }
+};
+
+export const loadItemsForUser = (userId: string): ShoppingItem[] => {
+  try {
+    const raw = localStorage.getItem(`shopping_items_${userId}`);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.error('Failed to load items from localStorage', e);
+    return [];
+  }
+};
+
+// ─── Quantity normalizer ──────────────────────────────────────────────────────
+
 const normalizeQuantity = (quantity: string | number | undefined): number => {
   if (quantity === undefined) return 1;
   return typeof quantity === 'string' ? parseInt(quantity) || 1 : quantity;
 };
 
+// ─── Slice ────────────────────────────────────────────────────────────────────
+
 const shoppingListSlice = createSlice({
   name: 'shoppingList',
   initialState,
   reducers: {
-    // ✅ Add new item - ensures quantity is a number
+    /** Call this right after login to hydrate the store from localStorage */
+    loadItemsFromStorage: (state, action: PayloadAction<string>) => {
+      state.items = loadItemsForUser(action.payload);
+    },
+
+    /** Call this on logout to clear items from the store (not localStorage) */
+    clearItems: (state) => {
+      state.items = [];
+    },
+
     addItem: (state, action: PayloadAction<any>) => {
       const newItem: ShoppingItem = {
         id: action.payload.id,
         name: action.payload.name,
-        quantity: normalizeQuantity(action.payload.quantity), // ✅ Convert to number
+        quantity: normalizeQuantity(action.payload.quantity),
         category: action.payload.category as Category,
         notes: action.payload.notes || '',
         attachmentUrl: action.payload.attachmentUrl,
@@ -34,41 +66,39 @@ const shoppingListSlice = createSlice({
         createdAt: action.payload.createdAt || Date.now()
       };
       state.items.push(newItem);
+      // Persist immediately
+      saveItemsForUser(newItem.userId, state.items);
     },
-    
-    // ✅ Edit existing item - ensures quantity is a number
+
     editItem: (state, action: PayloadAction<{ id: string; updatedData: any }>) => {
       const index = state.items.findIndex(item => item.id === action.payload.id);
       if (index !== -1) {
         const updates = action.payload.updatedData;
         state.items[index] = {
           ...state.items[index],
-          name: updates.name !== undefined ? updates.name : state.items[index].name,
-          quantity: updates.quantity !== undefined 
-            ? normalizeQuantity(updates.quantity) // ✅ Convert to number
+          name: updates.name ?? state.items[index].name,
+          quantity: updates.quantity !== undefined
+            ? normalizeQuantity(updates.quantity)
             : state.items[index].quantity,
-          category: updates.category !== undefined ? updates.category : state.items[index].category,
-          notes: updates.notes !== undefined ? updates.notes : state.items[index].notes,
-          attachmentUrl: updates.attachmentUrl !== undefined ? updates.attachmentUrl : state.items[index].attachmentUrl,
-          attachmentName: updates.attachmentName !== undefined ? updates.attachmentName : state.items[index].attachmentName,
-          userId: updates.userId !== undefined ? updates.userId : state.items[index].userId
+          category: updates.category ?? state.items[index].category,
+          notes: updates.notes ?? state.items[index].notes,
+          attachmentUrl: updates.attachmentUrl ?? state.items[index].attachmentUrl,
+          attachmentName: updates.attachmentName ?? state.items[index].attachmentName,
+          userId: updates.userId ?? state.items[index].userId
         };
+        // Persist immediately
+        saveItemsForUser(state.items[index].userId, state.items);
       }
     },
-    
-    // Remove item by id
+
     removeItem: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
+      const item = state.items.find(i => i.id === action.payload);
+      const userId = item?.userId;
+      state.items = state.items.filter(i => i.id !== action.payload);
+      if (userId) saveItemsForUser(userId, state.items);
     },
-    
-    // Optional: Clear all items
-    clearItems: (state) => {
-      state.items = [];
-    },
-    
-    // Optional: Load items (useful for persistence)
+
     loadItems: (state, action: PayloadAction<ShoppingItem[]>) => {
-      // ✅ Normalize all quantities when loading
       state.items = action.payload.map(item => ({
         ...item,
         quantity: normalizeQuantity(item.quantity)
@@ -77,5 +107,13 @@ const shoppingListSlice = createSlice({
   }
 });
 
-export const { addItem, editItem, removeItem, clearItems, loadItems } = shoppingListSlice.actions;
+export const {
+  addItem,
+  editItem,
+  removeItem,
+  clearItems,
+  loadItems,
+  loadItemsFromStorage
+} = shoppingListSlice.actions;
+
 export default shoppingListSlice.reducer;
